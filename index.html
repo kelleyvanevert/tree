@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Draw a recursive tree</title>
+</head>
+<body>
+
+<canvas id="tree" width="600" height="400"></canvas>
+
+<script>
+
+const canvas = document.getElementById("tree");
+const c = canvas.getContext('2d');
+
+c.translate(300, 0);
+c.strokeStyle = "black";
+c.lineWidth = 5;
+
+function drawTree (num) {
+  if (num == 0) {
+    return;
+  } else {
+
+    const len = num * 20;
+
+    c.moveTo(0, 0);
+    c.lineTo(0, len);
+    c.stroke();
+
+    c.save();
+      c.translate(0, len);
+      c.rotate(.5);
+      drawTree(num -1);
+    c.restore();
+
+    c.save();
+      c.translate(0, len);
+      c.rotate(-.5);
+      drawTree(num -1);
+    c.restore();
+  }
+}
+
+drawTree(6);
+
+</script>
+</body>
+</html>
